@@ -38,12 +38,19 @@ else
             echo '<h2>Posts in ' . $row['cat_name'] . ' category</h2>';
         }
      
+                // $sql = "select 
+                //     topic_id,topic_subject,topic_date,topic_cat 
+                // from 
+                //     topics 
+                // where 
+                //     topic_cat =" . mysqli_real_escape_string($conn, $_GET['id']);
+
                 $sql = "select 
-                    topic_id,topic_subject,topic_date,topic_cat 
-                from 
-                    topics 
-                where 
-                    topic_cat =" . mysqli_real_escape_string($conn, $_GET['id']);
+                post_id,post_title,post_date,post_category
+            from 
+                posts 
+            where 
+                post_category =" . mysqli_real_escape_string($conn, $_GET['id']);
          
         $result = mysqli_query($conn, $sql);
          
@@ -70,7 +77,7 @@ else
                 {               
                     echo '<tr>';
                         echo '<td class="leftpart">';
-                            echo '<h3><a href="topic.php?id=' . $row['topic_id'] . '">' . $row['topic_subject'] . '</a><h3>';
+                            echo '<h3><a href="topic.php?id=' . $row['post_id'] . '">' . $row['post_title'] . '</a><h3>';
                         echo '</td>';
                       
                     echo '</tr>';

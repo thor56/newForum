@@ -7,12 +7,12 @@ include 'header.php';
 // WHERE
            // cat_id = " . mysqli_real_escape_string($conn, $_GET['id'])
 $sql = "SELECT
-topic_id,
-topic_subject
+post_id,
+post_category
 FROM
-topics
+posts
 WHERE
-topics.topic_id = ". mysqli_real_escape_string($conn,$_GET['id']);
+post_id = ". mysqli_real_escape_string($conn,$_GET['id']);
 // . mysqli_real_escape_string($conn,$_GET['id']);   
  
 $result = mysqli_query($conn, $sql);
@@ -33,17 +33,13 @@ else
         while($row = mysqli_fetch_assoc($result))
         {
             echo '<h2>Topics in ′' . $row['topic_subject'] . '′ </h2>';
+
+            //DEBUG LATER
         }
      
 
         $sql = "SELECT
-        posts.post_topic,
-        posts.post_content,
-        posts.post_date,
-        posts.post_by,
-        posts.post_id,
-        users.user_id,
-        users.user_name
+       *
     FROM
         posts
     LEFT JOIN
@@ -51,7 +47,7 @@ else
     ON
         posts.post_by = users.user_id
     WHERE
-        posts.post_topic = " 
+        posts.post_category = " 
         . mysqli_real_escape_string($conn,$_GET['id']);
          
         $result = mysqli_query($conn, $sql);

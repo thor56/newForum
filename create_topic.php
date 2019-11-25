@@ -73,14 +73,16 @@ else
         <form name='cat_info' method='post' action=''>
           <div >
             <label for='topic_subject'>Post Title</label>
-            <input type='text' name='topic_subject' class='form-control' placeholder='Title' required>
+            <input type='text' name='topic_subject' class='form-control'
+             placeholder='Title' required>
             <p></p>
           </div>
             ";
                 echo '<select name="topic_cat" class="form-control">';
                     while($row = mysqli_fetch_assoc($result))
                     {
-                        echo '<option value="' . $row['cat_id'] . '">' . $row['cat_name'] . '</option>';
+                        echo '<option value="' . $row['cat_id'] . '">'
+                         . $row['cat_name'] . '</option>';
                     }
                 echo '</select>'; 
 
@@ -88,7 +90,8 @@ else
                 echo "
         <div >
             <label for='post_content'>Post description :</label>
-            <textarea name='post_content'class='form-control' placeholder='Post content' required/></textarea>
+            <textarea name='post_content'class='form-control'
+             placeholder='Post content' required/></textarea>
           </div>
           <p></p>
           <input type='submit' class='btn btn-primary btn-large' value='Post' />
@@ -121,63 +124,71 @@ else
         }
         else
         {
-     
+           
             //the form has been posted, so save it
-            //insert the topic into the topics table first, then we'll save the post into the posts table
+            //insert the topic into the topics table first, then we'll 
+//            save the post into the posts table
             $sql = "INSERT INTO 
-                        topics(topic_subject,
-                               topic_date,
-                               topic_cat,
-                               topic_by)
+                        posts(post_title,
+                        post_content,
+                        post_date,
+                        post_category,
+                        post_by)
                    VALUES('" . mysqli_real_escape_string($conn, $_POST['topic_subject']) . "',
+                        '" . mysqli_real_escape_string($conn, $_POST['post_content']) . "'   ,
                                NOW(),
                                " . mysqli_real_escape_string($conn, $_POST['topic_cat']) . ",
                                " . $_SESSION['user_id'] . "
                                )";
+                              
                       
-            $result = mysqli_query($conn, $sql);
-            if(!$result)
-            {
-                //something went wrong, display the error
-                echo 'An error occured while inserting your data. Please try again later.' . mysqli_error();
-                $sql = "ROLLBACK;";
-                $result = mysqli_query($conn, $sql);
-            }
-            else
-            {
-                //the first query worked, now start the second, posts query
-                //retrieve the id of the freshly created topic for usage in the posts query
-                $topicid = mysqli_insert_id($conn);
+            // $result = mysqli_query($conn, $sql);
+            // if(!$result)
+            // {
+            //     //something went wrong, display the error
+            //     echo 'An error occured while inserting your data. Please try again later.' . mysqli_error();
+            //     $sql = "ROLLBACK;";
+            //     $result = mysqli_query($conn, $sql);
+            // }
+            // else
+            // {
+            //     //the first query worked, now start the second, posts query
+            //     //retrieve the id of the freshly created topic for usage in the posts query
+            //     $topicid = mysqli_insert_id($conn);
                  
-                $sql = "INSERT INTO
-                            posts(post_content,
-                                  post_date,
-                                  post_topic,
-                                  post_by)
-                        VALUES
-                            ('" . mysqli_real_escape_string($conn, $_POST['post_content']) . "',
-                                  NOW(),
-                                  " . $topicid . ",
-                                  " . $_SESSION['user_id'] . "
-                            )";
+            //     $sql = "INSERT INTO
+            //                 posts(post_content,
+            //                       post_date,
+            //                       post_topic,
+            //                       post_by)
+            //             VALUES
+            //                 ('" . mysqli_real_escape_string($conn, $_POST['post_content']) . "',
+            //                       NOW(),
+            //                       " . $topicid . ",
+            //                       " . $_SESSION['user_id'] . "
+            //                 )";
                 $result = mysqli_query($conn,$sql);
                  
                 if(!$result)
                 {
                     //something went wrong, display the error
-                    echo 'An error occured while inserting your post. Please try again later.' . mysql_error();
+                    echo 'An error occured while inserting your post. Please try again later.' . mysqli_error($conn);
                     $sql = "ROLLBACK;";
                     $result = mysqli_query($conn, $sql);
                 }
                 else
                 {
+                    $topicid = mysqli_insert_id($conn);
                     $sql = "COMMIT;";
-                    $result = mysqli_query($conn, $sql);
+                    $result = mysqli_query($conn, $sql);                  
                      
                     //after a lot of work, the query succeeded!
-                    echo 'You have successfully created your new <a href="topic.php?id='. $topicid . '">Post</a>.';
+                     echo 'You have successfully created your new <a href="topic.php?id='.
+                      $topicid . '">Post</a>.';
+           //         echo 'You have successfully created your new Post.';
+
                 }
-            }
+            
         }
     }
 }

@@ -7,7 +7,7 @@ include 'header.php';
 
 
 
-$sql = "SELECT * FROM posts WHERE post_topic = ". mysqli_real_escape_string($conn, $_GET['id']);
+$sql = "SELECT * FROM posts WHERE post_id = ". mysqli_real_escape_string($conn, $_GET['id']);
 $result = mysqli_query($conn, $sql);
  
 if(!$result)
@@ -25,15 +25,22 @@ else
         //display post data
         while($row = mysqli_fetch_assoc($result))
                 {    
-                    $sql2="SELECT topic_subject FROM topics WHERE topic_id = $row[post_topic]";
+                    // $sql2="SELECT topic_subject FROM topics WHERE topic_id = $row[post_topic]";
+                    // $result2 = mysqli_query($conn, $sql2);
+                    // $sql3="SELECT user_name FROM users WHERE user_id = $row[post_by]";
+                    // $result3 = mysqli_query($conn, $sql3);
+                    // $sql4="SELECT reply,reply_by FROM reply WHERE reply_to = $row[post_topic]";
+                    // $result4 = mysqli_query($conn, $sql4);
+                    $sql2="SELECT post_title FROM posts WHERE post_id = "
+                    . mysqli_real_escape_string($conn, $_GET['id']);
                     $result2 = mysqli_query($conn, $sql2);
                     $sql3="SELECT user_name FROM users WHERE user_id = $row[post_by]";
                     $result3 = mysqli_query($conn, $sql3);
-                    $sql4="SELECT reply,reply_by FROM reply WHERE reply_to = $row[post_topic]";
+                    $sql4="SELECT reply,reply_by,reply_date FROM reply WHERE reply_to = $row[post_id]";
                     $result4 = mysqli_query($conn, $sql4);
            
                     while($row2 = mysqli_fetch_assoc($result2)){
-                    $post_title = $row2['topic_subject'];
+                    $post_title = $row2['post_title'];
                     }
                     while($row3 = mysqli_fetch_assoc($result3)){
                         $posted_by = $row3['user_name'];
@@ -72,6 +79,7 @@ else
                     while($row5 = mysqli_fetch_assoc($result5)){
                         $repliedby = $row5['user_name'];
                         echo '<div class="container bg-custom-new rounded shadow m-3 p-3">
+                        <p class="font-weight-lighter">('.$row4['reply_date'].')</p>
                         <p><h6>'.$repliedby.' says:</h6></p>
                         <h3 class="font-weight-light">'.$row4['reply'].'<h3></div>';
                     }    

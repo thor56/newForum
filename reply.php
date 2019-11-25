@@ -54,8 +54,8 @@ else
     //    $repmsg = $_POST['replycontent'];
     //    echo $repmsg;
         $sql = "
-        INSERT INTO  reply (reply,reply_to,reply_by) VALUES
-         ('".$_POST['replycontent']."',$_GET[id],'".$_SESSION['user_id']."')
+        INSERT INTO  reply (reply,reply_to,reply_by,reply_date) VALUES
+         ('".$_POST['replycontent']."',$_GET[id],'".$_SESSION['user_id']."',NOW())
         ";
         // $sql = "
         // INSERT INTO reply (reply,reply_to,reply_by) VALUES ("
