@@ -74,10 +74,5 @@ else if($_SESSION['user_level'] == '0')
 
 
 include 'display_cat.php';
-
-
-
-
-
 include 'footer.php';
 ?>

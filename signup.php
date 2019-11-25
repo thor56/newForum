@@ -49,6 +49,7 @@ if($_SERVER['REQUEST_METHOD'] != 'POST')
   <button type="submit" class="btn btn-primary m-3 shadow-lg rounded ">Register</button> </div>
      </form>
      </div>
+     </div>
      ';
 }
 else

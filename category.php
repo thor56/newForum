@@ -82,6 +82,7 @@ else
                       
                     echo '</tr>';
                 }
+             echo '</table>';
             }
         }
     }

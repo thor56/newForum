@@ -4,7 +4,9 @@
 include 'connect.php';
 include 'header.php';
 
-include 'display_cat.php';
+ include 'display_cat.php';
+
+
 
 
 include 'footer.php';

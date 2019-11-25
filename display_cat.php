@@ -30,7 +30,9 @@ else
              
         while($row = mysqli_fetch_assoc($result))
         {               
-            echo '<tr>';
+            echo '
+            
+            <tr>';
                 echo '<td class="leftpart">';
  //                   echo '<h3><a href="category.php?">' . $row['cat_name'] . '</a></h3>' . $row['cat_description'];
                       echo '<h3><a href="category.php?id='.$row['cat_id'].'">' . $row['cat_name'] . '</a></h3>' . $row['cat_description'];
@@ -41,6 +43,8 @@ else
                 // echo '</td>';
             echo '</tr>';
         }
+
+        echo '</table>';
     }
 }
 
