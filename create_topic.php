@@ -92,16 +92,23 @@ else
             <label for='post_content'>Post description :</label>
             <textarea name='post_content'class='form-control'
              placeholder='Post content' required/></textarea>
+             
+         
           </div>
+          <div>
+          
+          <input class='form-check-input m-2' type='checkbox' value='' name='anon_check'
+          id='defaultCheck1'>
+          
+         <label class='form-check-label ml-4' for='defaultCheck1'>
+         Anonymous
+         </label>
+          </div>
+          
           <p></p>
           <input type='submit' class='btn btn-primary btn-large' value='Post' />
-          <br>
-          <input class='form-check-input' type='checkbox' value='' name='anon_check'
-           id='defaultCheck1'>
-           
-          <label class='form-check-label' for='defaultCheck1'>
-          Anonymous
-          </label>
+          
+          
         
         
           </form>
