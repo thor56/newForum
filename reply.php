@@ -7,7 +7,19 @@
     
   
   </div>
+  <div>
+          
+          <input class='form-check-input m-1' type='checkbox' value='' name='anon_check_reply'
+          id='defaultCheck1'>
+          
+         <label class='form-check-label ml-4 text-light' for='defaultCheck1'>
+         Anonymous
+         </label>
+          </div>
+          <p></p>
   <button type="submit" class="btn btn-success " style="width:100px;">Reply</button>
+
+  
   </form>
 </div>
 <!-- <form method="post" action="">
@@ -53,9 +65,17 @@ else
     {
     //    $repmsg = $_POST['replycontent'];
     //    echo $repmsg;
+            //checking for anonymous
+            $anon_reply = 0;
+            //checking if anonymous checked
+            if(isset($_POST['anon_check_reply'])){
+                $anon_reply = 1;
+            }   
+
+
         $sql = "
-        INSERT INTO  reply (reply,reply_to,reply_by,reply_date) VALUES
-         ('".$_POST['replycontent']."',$_GET[id],'".$_SESSION['user_id']."',NOW())
+        INSERT INTO  reply (reply,reply_to,reply_by,reply_date,reply_anony) VALUES
+         ('".$_POST['replycontent']."',$_GET[id],'".$_SESSION['user_id']."',NOW(),$anon_reply)
         ";
         // $sql = "
         // INSERT INTO reply (reply,reply_to,reply_by) VALUES ("
