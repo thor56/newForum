@@ -40,8 +40,22 @@ session_start();
 
   
   <div class="collapse navbar-collapse" id="navbarSupportedContent"  >
-  <div class="shadow-lg border   rounded">
-  <ul class="navbar-nav mr-auto"  >
+
+  <div>
+<!-- search -->
+<form class="form-inline my-2 my-lg-0" method="post" action="searchresults.php">
+      <input class="form-control mr-sm-2" type="search"
+       placeholder="Search" aria-label="Search" name="searchbox" required>
+      <button class="btn btn-info my-2 my-sm-0 mr-5 "
+       type="submit">Search</button>
+    </form>
+      
+
+
+  </div>
+  
+  <div class="  shadow-lg border rounded ">
+  <ul class="navbar-nav mr-auto "  >
       <?php
       if(!isset($_SESSION['signed_in']))
       {
@@ -63,16 +77,10 @@ session_start();
 
       ?>
       </div>
+        
       </ul>
 
-<!-- search -->
-      <!-- <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search"
-       placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0 "
-       type="submit">Search</button>
-    </form> -->
-      
+
   </div>
 </nav>
 

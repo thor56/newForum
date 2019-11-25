@@ -62,7 +62,7 @@ else
         {
             if(mysqli_num_rows($result) == 0)
             {
-                echo 'There are no topics in this category yet.';
+                echo 'There are no posts in this category yet.';
             }
             else
             {
@@ -77,7 +77,9 @@ else
                 {               
                     echo '<tr>';
                         echo '<td class="leftpart">';
-                            echo '<h3><a href="topic.php?id=' . $row['post_id'] . '">' . $row['post_title'] . '</a><h3>';
+                            echo '<h3><a href="topic.php?id='
+                             . $row['post_id'] . '">' . $row['post_title'] 
+                             . '</a><h3>';
                         echo '</td>';
                       
                     echo '</tr>';
