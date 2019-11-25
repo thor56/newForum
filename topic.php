@@ -31,6 +31,9 @@ else
                     // $result3 = mysqli_query($conn, $sql3);
                     // $sql4="SELECT reply,reply_by FROM reply WHERE reply_to = $row[post_topic]";
                     // $result4 = mysqli_query($conn, $sql4);
+
+                   
+
                     $sql2="SELECT post_title FROM posts WHERE post_id = "
                     . mysqli_real_escape_string($conn, $_GET['id']);
                     $result2 = mysqli_query($conn, $sql2);
@@ -43,14 +46,23 @@ else
                     $post_title = $row2['post_title'];
                     }
                     while($row3 = mysqli_fetch_assoc($result3)){
+                         //checking if anonymous or not
+                    $anony = $row['post_anony'];
+                    if($anony==1){
+                        $posted_by = "Anonymous User";
+                    }
+                    else{
                         $posted_by = $row3['user_name'];
+                    }
+                        
                         }
                         
                         
 //post body
                     echo '<div class="container bg-custom-new rounded shadow"> ';
                         echo '<tr><td class="Title">';
-                            echo '<h1 class="display-3">'.$post_title.'</h1> <p class="font-weight-lighter">by ' .$posted_by. ' On '.$row['post_date'].'</p>
+                            echo '<h1 class="display-3">'.$post_title.'</h1> <p class="font-weight-lighter">by '
+                             .$posted_by. ' On '.$row['post_date'].'</p>
                                <hr class="my-4 ">
                                ';
                         echo '</td>';

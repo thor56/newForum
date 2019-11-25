@@ -95,7 +95,13 @@ else
           </div>
           <p></p>
           <input type='submit' class='btn btn-primary btn-large' value='Post' />
-          <a href='#' class='pull-right btn btn-default'  >Cancel</a>
+          <br>
+          <input class='form-check-input' type='checkbox' value='' name='anon_check'
+           id='defaultCheck1'>
+           
+          <label class='form-check-label' for='defaultCheck1'>
+          Anonymous
+          </label>
         
         
           </form>
@@ -124,6 +130,11 @@ else
         }
         else
         {
+            $anon_checked = 0;
+            //checking if anonymous checked
+            if(isset($_POST['anon_check'])){
+                $anon_checked = 1;
+            }
            
             //the form has been posted, so save it
             //insert the topic into the topics table first, then we'll 
@@ -133,13 +144,14 @@ else
                         post_content,
                         post_date,
                         post_category,
-                        post_by)
+                        post_by,
+                        post_anony)
                    VALUES('" . mysqli_real_escape_string($conn, $_POST['topic_subject']) . "',
                         '" . mysqli_real_escape_string($conn, $_POST['post_content']) . "'   ,
                                NOW(),
                                " . mysqli_real_escape_string($conn, $_POST['topic_cat']) . ",
                                " . $_SESSION['user_id'] . "
-                               )";
+                               ,$anon_checked)";
                               
                       
             // $result = mysqli_query($conn, $sql);
